@@ -1,0 +1,634 @@
+\documentclass [12pt]{report}
+\usepackage{multicol}
+\usepackage[czech]{babel}
+\usepackage{multicol}
+\usepackage{a4wide}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage[all]{xypic}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+\renewcommand{\labelenumi}{(\roman{enumi})} 
+\usepackage{tabularx}
+\usepackage{wrapfig}
+\usepackage{color}
+\usepackage{array}
+\usepackage{textcomp}
+\usepackage{siunitx}
+\usepackage{epsfig}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{tabularx}
+\usepackage[metapost, mplabels,truebbox,clip]{mfpic}
+
+
+\makeatletter
+\newcommand\figcaption{\def\@captype{figure}\caption}
+\makeatother
+
+\renewcommand{\sectionmark}[1]{ \markright{-- \thesection.\ #1}{}}
+
+\fancypagestyle{plain}{%
+\fancyhf{}
+\lhead[L]{}
+\chead{}
+\rhead[R]{\nouppercase\leftmark}
+\lfoot{}
+\cfoot{}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead[L]{}
+\chead{}
+\rhead[R]{\nouppercase\leftmark}
+\lfoot{}
+\cfoot{}
+\rfoot{\thepage}
+\begin{document}
+
+%\newtheorem{veta}{Věta}[section]
+%\newtheorem{definice}{Definice}[section]
+%\newtheorem{dusledek}{Důsledek}[section]
+%\newtheorem{lemma}{Lemma}[section]
+
+\newtheorem{veta}{Věta}[section]
+\newtheorem{definice}[veta]{Definice}
+\newtheorem{dusledek}[veta]{Důsledek}
+\newtheorem{lemma}[veta]{Lemma}
+\newtheorem{poznamka}[veta]{Poznámka}
+\newtheorem{priklad}[veta]{Příklad}
+\theoremstyle{definition}
+
+
+
+
+
+
+\def\nsd{\operatorname{nsd}}
+\def\id{\operatorname{id}}
+\def\ker{\operatorname{ker}}
+\def\Aut{\operatorname{Aut}}
+\def\Gal{\operatorname{Gal}}
+\def\Fix{\operatorname{Fix}}
+\def\c{\operatorname{\mathbb{C}}}
+\def\R{\operatorname{\mathbb{R}}}
+\def\q{\operatorname{\mathbb{Q}}}
+\def\e{\operatorname{\mathcal{V}}}
+\def\z{\operatorname{\mathbb{Z}}}
+\def\n{\operatorname{\mathbb{N}}}
+\def\s{\operatorname{\subseteq}}
+\def\w{\operatorname{\zeta}}
+\def\fii{\operatorname{\varphi}}
+\def\o{\operatorname{\mathcal{O}}}
+\def\I{\operatorname{\mathcal{I}}}
+\def\J{\operatorname{\mathcal{J}}}
+\def\P{\operatorname{\mathcal{P}}}
+\def\pn{\operatorname{\mathfrak{P}}}
+\def\pn{\operatorname{\mathfrak{p}}}
+\def\res{\operatorname{res}}
+
+\begin{titlepage}
+{
+\centering
+\LARGE \textbf{STŘEDOŠKOLSKÁ ODBORNÁ ČINNOST}\\
+\Large\textbf{Obor č. 1: Matematika a statistika}\\
+\vspace{6cm}
+\LARGE\textbf{Isogenie v kryptografii}\\
+}
+\vspace{10cm}
+{\noindent\large\bfseries Zdeněk Pezlar\\ 
+	\large\bfseries Jihomoravský kraj\\ }
+\center\large Brno 2020
+	
+\end{titlepage}
+
+\begin{titlepage}
+{
+\centering
+\LARGE \textbf{STŘEDOŠKOLSKÁ ODBORNÁ ČINNOST}\\
+\Large\textbf{Obor č. 1: Matematika a statistika}\\
+\vspace{6cm}
+\LARGE\textbf{Isogenie v kryptografii}\\
+\vspace{1cm}
+\LARGE\textbf{Isogeny Based Cryptography}\\
+}
+\vspace{6cm}
+{\noindent\large\bfseries Autor: Zdeněk Pezlar\\ 
+	\large\bfseries Škola: Gymnázium Brno, třída Kapitána Jaroše, p. o.\\
+    \large\bfseries Kraj: Jihomoravský \\
+	\large\bfseries Konzultant: Bc. Vojtěch Suchánek\\}
+
+\end{titlepage}
+
+\newpage
+\thispagestyle{empty}
+\vspace*{14cm}
+\subsubsection*{Prohlášení}
+
+Prohlašuji, že jsem svou práci SOČ vypracoval samostatně a použil jsem pouze prameny a literaturu uvedené v seznamu bibliografických záznamů.
+Prohlašuji, že tištěná verze a elektronická verze soutěžní práce SOČ jsou shodné. 
+Nemám závažný důvod proti zpřístupňování této práce v souladu se zákonem č. 121/2000 Sb., o právu autorském, o právech souvisejících s právem autorským a o změně některých zákonů (autorský zákon) v platném znění. \\[1cm]
+V Brně dne: \dotfill \ \ \ \ \ \  Podpis: \dotfill
+
+\newpage
+\thispagestyle{empty}
+\begin{center}
+\includegraphics[width=0.35\textwidth]{podpora_soc-horizontalni.png}
+\end{center}
+\begin{center}
+\includegraphics[width=0.45\textwidth]{logo_JMK_pruhledne.png}
+\end{center}
+\vspace*{0.7cm}
+\begin{center}
+\includegraphics[width=0.35\textwidth]{jcmm-logotype-positive1.png}
+\end{center}
+\vspace*{9.5cm}
+\subsection*{Poděkování}
+++Tato práce byla vypracována za finanční podpory JMK.
+
+
+\newpage
+\thispagestyle{empty}
+\subsection*{Abstrakt}
+abstrakt
+
+
+\subsection*{Klíčová slova}
+isogenie;klíčové slovo.
+
+
+\vspace*{4cm}
+
+\subsection*{Abstract}
+abstrakt
+
+\subsection*{Key words}
+isogenie;klíčové slovo.
+
+
+
+
+
+
+\tableofcontents
+\thispagestyle{empty}
+
+\chapter*{Úvod}
+\addcontentsline{toc}{chapter}{Úvod}
+\markboth{Úvod}{}
+
+celkem úvod
+
+
+
+
+
+\chapter*{Použitá značení}
+
+\begin{flalign*}
+&a \mid b  &&a \text{ dělí } b\\
+&\mathcal{D}(a,b) &&\text{největší společný dělitel } a,b\\
+&a \sim b  &&a \text{ je asociované s } b\\
+&\overline{a+b\sqrt{m}} &&\text{konjugát } a+b\sqrt{m} \text{, neboli } a-b\sqrt{m}\\
+&\mathbb{N},\mathbb{Z},\mathbb{Q},\mathbb{R},\mathbb{C} &&\text{množina přirozených, celých, racionálních, reálných, komplexních čísel} \\
+&\mathbb{Z}_d &&\text{okruh zbytků modulo } d \\
+&R[x] &&\text{okruh polynomů s koeficienty nad okruhem } R\\
+&K(a_1,\dots, a_n) &&\text{nejmenší podtěleso } L, \text{ které obsahuje těleso } K \text{ i prvky } a_1, \dots, a_n \in L\\ 
+&[K:L] &&\text{stupeň rozšíření tělesa } K \text{ nad } L, \text{t.j. dimenze vektorového prostoru } K:L\\ 
+&\mathcal{O}_K &&\text{okruh celých algebraických čísel tělesa } K\\
+&Cl(\mathcal{O}_K) &&\text{grupa tříd ideálů tělesa } K\\
+&h_K &&\text{řád grupy tříd ideálů tělesa } K\\
+&\mathcal{U}(\mathcal{O}_K) &&\text{grupa jednotek tělesa } K\\
+&(a) &&\text{hlavní ideál generovaný prvkem } a\\
+&\frac{\mathcal{I}}{m} &&\text{lomený ideál } \frac{\mathcal{I}}{m}\\
+&\Big(\frac{a}{m}\Big) &&\text{hlavní lomený ideál } \frac{(a)}{m}\\
+&N(a) &&\text{norma prvku } a\\
+&N((a)) &&\text{norma ideálu generovaného } a\\
+&\mathcal{I} \vert \mathcal{J} &&\text{ideál } \mathcal{I} \text{ dělí ideál } \mathcal{J}\\
+&P_\alpha &&\text{minimální polynom } \alpha \text{ nad } K\\
+&\mathsf{G} / \mathsf{H} &&\text{faktorgrupa } \mathsf{G} \text{ podle } \mathsf{H}
+\end{flalign*}
+
+\chapter{Eliptické křivky}
+
+\section{Základy}
+
+V naší první kapitole se budeme věnovat isogeniím eliptických křivek a práci s nimi. Budeme budovat teorii a intuici potřebnou k smysluplné diskuzi protokolu SIDH. Pro porozumění textu je třeba ovládat základy (to zjistím, až to napíšu). Budeme postupovat vesměs dle ??, nicméně další vhodný úvodní materiál se nachází na ??. Na těchto adresách se dají najít důkazy všech uvedených tvrzení, u příliš technických či obtížných tvrzení důkaz uvádět nebudeme. \\
+
+Po celou dobu budeme pracovat nad projektivním prostorem nad uzávěrem tělesa $K$, což je množina bodů v $\overline{K}^n$, kde dva body považujeme za ekvivalentní, pokud leží v přímce s počátkem, můžeme proto místo jednotlivých bodů pracovat s přímkami skrz počátek. Chtěli bychom, aby se každé dvě $n-1$ rozměrné roviny protínaly, s tím máme problém pouze pokud protínáme dvě rovnoběžné. V každém směru si tak můžeme definovat projektivní prostor stupně $n-1$ v nekonečnu, kde se protínají rovnoběžné roviny.
+
+\begin{definice}
+Projektivní prostor $\mathbb{P}^n (\overline{K})$ definujeme jako množinu nenulových vektorů $(a_0, \dots, a_n) \in \overline{K}^{n+1}$ s ekvivalentní relací $(a_0, \dots, a_n) \sim (b_0, \dots, b_n)$, pokud existuje nenulové $\lambda$, že $(a_0, \dots, a_n) = \lambda (b_0, \dots, b_n)$. Tyto třídy ekvivalence budeme značit $(a_0 : \dots : a_n)$.\\
+
+Pokud je jedno z $a_i$ nulové, získáme $n-1$ rozměrný prostor v nekonečnu.
+\end{definice}
+
+Projektivní prostor $\mathbb{P}^2 (\mathbb{R})$ je známý jako projektivní rovina. Každé dvě přímky se protínají v jednom bodě, přičemž rovnoběžné přímky se protínají v bodě v nekonečnu v daném směru.
+
+\begin{poznamka}
+Je zajímavé uvážit spojitost projektivních prostorů s barycentrickými souřadnicemi, kde je každý bod vyjádřen jako vážený průměr vrcholů referenčního simplexu. Tyto souřadnice jsou též homogenní a každé dvě přímky se protínají, byť některé v~nekonečnu, takové body mají součet vah roven $0$. Můžeme tedy o barycentrických souřadnicích přemýšlet jako o projektivním prostoru s jiným základem.
+\end{poznamka}
+
+?????? Přípomeňme si pak definici eliptické křivky:
+\begin{definice}
+Pro $a,b \in K$, že $4a^2 + 27 b^3 \neq 0$, definujeme v $\mathbb{P}^2 (\overline{K})$ eliptickou křivku jako množinu bodů $(X:Y:Z) \in K^3$ splňující:
+\begin{equation*}
+Y^2 Z = X^3 + a X Z^2 + b Z^3. 
+\end{equation*}
+\end{definice}
+
+Čtenář, jenž je již obeznámen s eliptickými křivkami, může protestovat, že eliptická křivka je množina bodů $x,y \in K$ splňující:
+\begin{equation*}
+y^2 = x^3 + a x + b.
+\end{equation*}
+Pokud máme v rovnici eliptické křivky $Z=0$, pak i $X = 0$ a máme jediný bod $(0:1:0)$. Jinak můžeme celou rovnici podělit $Z^3$ a přejít na proměnné $x := \frac{X}{Z}, y := \frac{Y}{Z}$ a získat nám známou formu, kterou budeme dále označovat jako \textit{Weierstrassovu}. Pak naše křivka je množina bodů $(x,y) \in K^2$ splňujících $y^2 = x^3 + a x + b$ spolu s bodem v nekonečnu $\mathcal{O} = (0:1:0)$.\\
+
+Podívejme se nyní na eliptickou křivku $E$ geometricky. Je zjevné, že má graf symetrický podle osy $x$, definujme proto k $P \in E$ bod $-P \in E$ jako obraz $P$ podle osy $x$. Pokud bychom na bodech naší křivky definovali součet, chtěli bychom, aby součet $P$ a $-P$ byl právě $\mathcal{O}$.
+
+OBrázky
+
+Pokud řekneme, že tečna k $E$ ji protíná ve dvou stejných bodech, pak každá přímka protíná $E$ v právě třech bodech včetně multiplicity. Speciálně tečna v bodě $y=0$ tento bod protíná dvakrát a ten třetí je právě bod v nekonečnu $E$. Pak si sčítání $+$ na $E$ můžeme definovat tak, že součet každých tří bodů v přímce je $\mathcal{O}$. Pokud tak přímka procházející $P,Q \in E$ protíná $E$ potřetí v $R$, pak definujeme $P+ Q = -R$. Pro takto definovaný součet můžeme pro $P,Q \in E$ odvodit několik důležitých vlastností:
+\begin{enumerate}
+\item $P + Q = Q + P$,
+\item $(P + Q) + R =P + ( Q + R)$,
+\item $P + \mathcal{O} = P$,
+\item $P + (-P) = \mathcal{O}$.
+\end{enumerate} 
+
+Poznamenejme, že asociativita není příliš jednoduchá dokázat, ??. Při takto definovaném sčítání můžeme s body na $E$ pracovat jako s abelovskou grupou se sčítáním a~neutrálním prvkem $\mathcal{O}$. Samozřejmě součet dvou bodů dokážeme za pomocí analytické geometrie přímo spočíst:
+\begin{veta}
+
+\end{veta}
+Důkaz s prominutím neuvádím. Pro zkrácení zápisu si budeme definovat skálární násobky bodů následovně:
+\begin{definice}
+Mějme bod $P \in E$. Pak pro $n$ přirozené definujeme $n$-násobek:
+\begin{equation*}
+[n]_E P = \underbrace{P+ \cdots + P}_{n},
+\end{equation*}
+příčemž pro $n < 0$ definujeme $[n]_E P = [-n]_E (-P)$ a $[0]_E P = \mathcal{O}$.
+\end{definice}
+
+
+tu příklad, jak v Q tak v Z[n], hezky graficky\\
+
+
+Všimneme si, že pro $P$ s $y=0$ je $[2]P = \mathcal{O}$. Na příkladu ?? též ale vidíme, že trojnásobek bodu ??? dává též $\mathcal{O}$. Obecně by nás mohlo zajímat, které body pošle násobení $n$ do nekonečna.
+\begin{definice}
+Buď $n$ celé číslo. O množině všech $P \in E$, že $[n] P = \mathcal{O}$, řekneme, že tvoří $n$-\textit{torzi} $E$ a budeme ji značit $E[n]$.
+\end{definice}
+-> jak se chová E[n] ? \\
+
+Násobení $n$ patří mezi endomorfismy $E \mapsto E$. Se sčítáním endomorfismů $\phi,\psi : E \mapsto E, P \in E$:
+\begin{equation*}
+(\phi + \psi)(P) := \phi(P) + \psi(P)
+\end{equation*}
+a skládáním $\psi \circ \phi = \phi(\psi)$, spolu s nulovou mapou $0: P \mapsto \mathcal{O}$, tvoří endomorfismy $E$ okruh, který budeme značit $End(E)$. ??\\
+
+vlastnosti End(E)\\
+
+??? 
+
+Pojďme se místo endomorfismů dívat obecně na morfismy mezi eliptickými křivkami. Vidíme, že mapa $(x,y) \mapsto (u^2 x^\prime, u^3 y^\prime) := (x^\prime, y^\prime)$ nám dává isomorfismus přes $K$ mezi křivkami:
+\begin{equation*}
+y^2 = x^3 + ax + b \mapsto y^2 = x^3 + u^4 x + u^6 b \Leftrightarrow (y^\prime)^2 = (x^\prime)^3 + a x^\prime + b
+\end{equation*}
+pro libovolné $u \in \overline{K}$. Takovéto mapy jsou zřejmě jediné isomorfismy dané lineárním přenásobením souřadnic. Uvažme nicméně zobrazení převádějící křivky:
+\begin{equation*}
+y^2 = x^3 + ax +b \mapsto d y^2 = x^3 + ax + b
+\end{equation*}
+dané $(x,y) \mapsto (x,\sqrt{d}y)$. Nemáme nutně isomorfismus přes $K$, ale přes jeho rozšíření $K(\sqrt{d})$. 
+\begin{definice}
+Pro eliptickou křivku $E: y^2 = x^3 + ax + b$ nad $K$ definujeme její \textit{kvadratický twist} jako křivku $E^d: d y^2 = x^3 + ax + b$ nad $K(\sqrt{d})$ pro $\sqrt{d} \not\in K, d \in K$. 
+\end{definice}
+
+Chtěli bychom říci, kdy mezi dvěma křivkami existuje isomorfismus, tedy najít nějaký invariant, který isomorfní křivky sdílí. Takovou funkci splňuje právě $j$-invariant:
+\begin{definice}
+Pro eliptickou křivku $E: y^2 = x^3 + ax + b$ definujeme její $j$-invaraint jako:
+\begin{equation*}
+j(E) = 1728 \frac{4a^3}{4a^3+27b^2}.
+\end{equation*}
+\end{definice}
+Poznamenejme, že ten je vždy definovaný, neboť eliptické křivky mají nenulový diskriminant.
+\begin{veta}
+Dvě křivky definované nad $K$ jsou isomorfní nad $\overline{K}$ právě pokud mají stejný $j$-invariant.
+\end{veta}
+tu příklady !!!!, možná něco o tom, kdy je to nula etc..............
+\section{Isogenie}
+
+Pojďme se nyní z endomorfismů naší křivky $E$ přesunot na zobrazení převádící na sebe i různé eliptické křivky. Speciálně se pojďme podívat na zobrazení daná lomenou funkcí nad $K$, která na sebe tyto křivky převádí.
+
+\begin{definice}
+Ať $E_1,E_2 \in \overline{K}$ jsou eliptické křivky. Pak surjektivní morfismus $E_1 \mapsto E_2$  daný racionální funkcí nad $K$,  který posílá bod v nekonečnu $E_1$ na bod v nekonečnu $E_2$, nazveme \textit{isogenií}. 
+\end{definice}
+
+Pod stupňem isogenie budeme rozumnět jejímu stupni jako racionální mapě. Všimneme si, že jak násobení bodů skalárem, tak naše isomorfismy zmíněné na konci předchozí kapitoly jsou isogenie.\\
+
+\begin{veta}
+Buď $\phi: E \mapsto E^\prime$ isogenie stupně $n$. Pak existuje jediná isogenie $\hat{\phi}: E^\prime \mapsto E$, která splňuje:
+\begin{enumerate}
+\item $\phi \circ \hat{\phi} = [n]_{E^\prime}$,
+\item $\hat{\phi} \circ \phi = [n]_E$,
+\item $\widehat{\phi \circ \psi} = \hat{\psi} \circ \hat{\phi}$,
+\item $\widehat{\phi + \psi} = \hat{\phi} + \hat{\psi}$,
+\item $\hat{\hat{\phi} } = \phi $.
+\end{enumerate} 
+Isogenii $\hat{\phi}$ budeme označnovat jako isogenii duální k $\phi$.
+\end{veta}
+
+Do nekonečna $E_2$ se ne nutně pošle pouze bod v nekončnu $E_1$, ale i kořeny jmenovatel jejího zlomku, které náleží do $\overline{K}$. O jejich množině budeme hovořit jako o \textit{jádře} naší isogenie $\phi$ a budeme jej značit $\ker \phi$, počet jeho prvků jako $\# \ker \phi$. Poznamenejme, že pokud $P \in \ker \phi$, pak je tam i $-P$, obecně $\ker \phi$ tvoří podgrupu. Navíc si za chvíli ukážeme,  že existuje třída isogenii taková, že každá podrgupa $K$ jednoznačně určuje isogenii z $K$.
+
+\begin{definice}
+Mějme $E,E_1 \in \overline{K}$ a $\phi: E \mapsto E_1$ isogenii stupně $k$. Pokud je $\# \ker \phi = k$, pak o $\phi$ řekneme, že je separabilní. Jinak řekneme, že $\phi$ je neseparabilní. V případě, že je $\deg \phi $ roven mocnině charakteristiky $K$, mluvíme o $\phi$ jako o čistě neseparabilní. ?? function fields
+\end{definice}
+
+Nás budou dále zajímat hlavně isogenie separabilní. ??
+
+\begin{veta}
+Každá separabilní isogenie $\phi$ z $E$ je jednoznačně identifikovatelná dle jejího jádra. Navíc je svým jádrem separabilní isogenie již jednoznačně určena.
+\end{veta}
+
+Pokud je tak $G = \ker \phi$ grupa tvořená jádrem $\phi$, můžeme značit $E/G$ cílovou křivku isogenií, jakožto faktorgrupa $E/G$.
+
+v této či další už se dobrat s SIDH.
+
+
+
+\chapter{SIDH}
+
+Přes Caesarovu šifru až po šifrování za pomocí Enigmy v období druhé světové války, po většinu lidské historie se využívaly kryptografické systémy založené na faktu, že obě komunikující partie si po domluvě vyberou způsob maskování zprávy a ten pro ostatní zůstává skrytý. Například právě o kolik písmen v Caesarově šifře transponujeme. Tento způsob nutně závisí na faktu, že se obě strany před výměnou mají možnost přes bezpečný kanál na tomto způsobu domluvit. S přibývajícím počtem účastníků a~frekvencí komunikace, na příklad našeho každodenního interagování na internetu, je bohužel třeba vyšší počet klíčů a příbývá risk  kompromitace.\\
+
+Kvůli takovým obavám přišli Whitfield Diffie a Martin Hellman v~roce $1976$ s revolučním nápadem, asymetrickou kryptografií, kde každý z účastníků má svůj vlastní \textit{privátní klíč}, který s nikým nesdílí. Všechny strany, i potenciální útočník, znají několik informací, které jsou známé jako \textit{veřejné parametry}. Obě komunikující strany za pomocí veřejných informací tajně transformují svůj privátní klíč a výsledek, který budeme nazývat \textit{veřejným klíčem}, publikují. Oba účastnící vezmou veřejný klíč toho druhého a provedou s ním ty samé tajné kroky závisící na jejich privátním klíči. Podstatou takové výměny je, že na jejím konci získají obě původní strany netriviální informaci, tedy informaci takovou, že žádná třetí strana ji nedokáže snadno uhodnout, za pomocí níž poté mohou společnou komunikaci šifrovat a nikdo jiný již jejich zprávy neuvidí. Předpokládá se, že pouze ze znalosti veřejného klíče je pro každou další partii těžké replikovat klíč privátní a že pole možných sdílených informací je obrovské. Vyhneme se tak přímočarým řešením hrubou silou.\\
+
+Pojďme se podívat na právě protokol, který Diffie a Hellman navrhli. Budeme o něm dále mluvit jako o \textit{Diffie-Hellmanově výměně}. Je založena na problému \textit{diskrétního logaritmu} prvku $a \in \mathbb{Z}_p \setminus \lbrace 0 \rbrace$. Tento problém po nás ze znalosti primitivního kořene $g$ modulo $p$ žádá najít $k$, že $g^k = a$ v $\mathbb{Z}_p$.\\
+
+
+-> tu nějak hezky typeset algoritmus
+
+
+
+\chapter*{Závěr}
+\addcontentsline{toc}{chapter}{Závěr}
+\markboth{Závěr}{}
+zu ende
+
+\begin{thebibliography}{97}
+\bibitem{Benes}
+BENEŠ, Petr: \textit{Zákony Reciprocity.} Diplomová práce. Brno: Masarykova univerzita, 2010. 
+
+\bibitem{Spencer}
+DECHENNE, Spencer. The Ramanujan-Nagell Theorem: Understanding the Proof. Dostupné z: http://buzzard.ups.edu/courses/2013spring/projects/spencer-ant-ups-434-2013.pdf
+
+\bibitem{sbornicek2}
+DOLEŽÁLEK, Matěj. Pellova rovnice a kvadratické okruhy. In: PraSe, Organizátoři. PraSe Sborníček 2019 [online]. Sklené, 2019. Dostupné z: \url{https://prase.cz/soustredeni/sbornik.php?sous=47}. 
+
+
+\bibitem{Hrnciar}
+HRNČIAR, Maroš: \textit{Řešení diofantických rovnic rozkladem v číselných tělesech.} Diplomová práce. Praha: 2015. 
+
+\bibitem{sbornicek}
+HUDEC, Pavel. Odmocniny z jedničky. In: $i$KS, Organizátoři. $i$KS Sborníček 2019 [online]. Kunžak, 2019. Dostupné z: \url{http://iksko.org/files/sbornik8.pdf}. 
+
+\bibitem{Kuril}
+KUŘIL, Martin: \textit{Základy teorie grup}.
+
+\bibitem{Lenstra}
+LENSTRA JR, Hendrik W.: \textit{Solving the Pell Equation.} 2002. 
+
+\bibitem{Marcus}
+MARCUS, Daniel A.: \textit{Number fields}. New York: Springer-Verlag, 1977.
+
+\bibitem{Tomas}
+PERUTKA, Tomáš: \textit{Vyjadřování prvočísel kvadratickými formami.} Středoškolská odborná činnost. Brno: Masarykova univerzita, 2017. 
+
+\bibitem{Perutka}
+PERUTKA, Tomáš: \textit{Užití dekompoziční grupy k důkazu zákona kvadratické reciprocity.} Středoškolská odborná činnost. Brno: Masarykova univerzita, 2018. 
+
+\bibitem{Pupik}
+PUPÍK, Petr: \textit{Užití grupy tříd ideálů při řešení některých diofantických rovnic.} Diplomová práce. Brno: Masarykova univerzita, 2009.
+
+\bibitem{Raclavsky}
+RACLAVSKÝ, Marek. \textit{Racionální body na eliptických křivkách}. Diplomová práce. Praha, 2014.
+\bibitem{Rosicky}
+ROSICKÝ, Jiří: \textit{Algebra}. Brno: Masarykova univerzita, 2002.
+
+\bibitem{Washington}
+WASHINGTON, Lawrence C.: \textit{Elliptic Curves: Number theory and cryptography}. Maryland, 2008. 
+
+\bibitem{iksko}
+$i$KS - mezinárodní korespondenční seminář [online]. Dostupné z: \url{iksko.org}.
+
+\end{thebibliography}
+\end{document}
+
+
+
+%\begin{veta} Nechť $p,q$ jsou různá lichá prvočísla. Potom 
+%$$\left( \frac{p}{q} \right) = \left( \frac{q}{p} \right) \cdot (-1)^{\frac{(p-1)(q-1)}{4}}.$$
+
+%Dále navíc Pro libovolná celá čísla $a,b$ a liché prvočíslo $p$ platí:
+%\begin{enumerate}
+%\item $\bigl( \frac{a}{p} \bigr)\cdot\bigl( \frac{b}{p} \bigr)=\bigl( %\frac{ab}{p} \bigr),$
+%\item $\bigl( \frac{-1}{p} \bigr) = (-1)^{\frac{p-1}{2}},$
+%\item $\bigl( \frac{2}{p} \bigr) = (-1)^{\frac{p^2-1}{8}}.$ 
+%\end{enumerate}
+%\end{veta}
+
+%\ Vzhledem k důležitosti těchto tvrzení uvedeme ještě ekvivalentní formu, jíž je možné některé z nich vyjádřit -- a to pomocí kongruencí:
+
+%\begin{veta} Nechť $p,q$ jsou různá lichá prvočísla. Potom 
+%$$\left( \frac{p}{q} \right) = \begin{cases}
+%\left( \frac{q}{p} \right) \qquad \text{pokud} \; p\;\text{nebo}\; q\equiv 1\pmod4;\\ 
+%-\left( \frac{q}{p} \right) \qquad \mbox{pokud} \; p\equiv q\equiv 3 \pmod{4}. \end{cases} $$
+
+%Dále navíc pro libovolná celá čísla $a,b$ a liché prvočíslo $p$ platí:
+%\begin{enumerate}
+%\item $\bigl( \frac{a}{p} \bigr)\cdot\bigl( \frac{b}{p} \bigr)=\bigl( \frac{ab}{p} \bigr),$
+%\item $\bigl( \frac{-1}{p} \bigr) =
+%\begin{cases}
+%1 \quad \text{pokud} \; p\equiv1\pmod4\\
+%-1\quad\text{pokud}\; p\equiv3\pmod4
+%\end{cases}$
+%\item $\bigl( \frac{2}{p} \bigr) = 
+%\begin{cases}
+%1 \quad \text{pokud} \; p\equiv\pm1\pmod8\\
+%-1\quad\text{pokud}\; p\equiv\pm3\pmod8.
+%\end{cases}$
+%\end{enumerate}
+%\end{veta
+
+
+% Cvičení: falešný násobení PO_L
+
+
+% \Zdroje: Dumit Foote, Zakony reciprocity, Rosicky, Cox, Marcus, clanek o Mihaelescau?, Ireland Rosen?, Pupik?
+
+%\begin{definice} Množinu $G$ spolu s binární operací $\odot$ na ní definovanou nazveme grupou, pokud splňuje tyto podmínky:
+%\begin{enumerate}
+%\item operace je asociativní, tzn.\ pro každé $x,y,z \in G$ platí $(x\odot y)\odot z=x\odot(y\odot z)$,
+%\item existuje tzv.\ neutrální prvek, tedy nějaké $e \in G$ takové, že pro každé $x \in G$ platí $e\odot x=x=x\odot e$,
+%\item ke každému prvku můžeme nalézt prvek k němu inverzní, tedy pro každé $x\in G$ existuje $y\in G$ tak, že $x\odot y=e=y\odot x$. 
+%\end{enumerate}
+%\ Pokud je operace navíc komutativní, hovoříme o abelovské nebo komutativní grupě.
+%\end{definice}
+
+%\begin{definice} Nechť R je množina, $+$, $\cdot$ binární operace na ní definované. Pak $(R,+,\cdot)$ je okruh, pokud:
+%\begin{enumerate}
+%\item $(R,+)$ je komutativní grupa,
+%\item operace $\cdot$ je asociativní a existuje vzhledem k ní neutrální prvek,
+%\item platí oboustranná distributivita, tedy pro libovolné $a,b,c\in R$ platí $a\cdot(b+c)=a\cdot b+a\cdot c,$ $(b+c)\cdot a=b\cdot a+ c\cdot a.$
+%\end{enumerate}
+%\ Pokud je i operace $\cdot$ komutativní, hovoříme o komutativním okruhu.
+%\end{definice}
+
+%\ Operaci + běžně nazýváme sčítání a neutrální prvek vůči ní značíme symbolem 0, operaci $\cdot$ nazýváme násobení a neutrální prvek vůči ní značíme jako $1$.
+
+
+
+%\begin{definice} Komutativní okruh $R$ nazýváme obor integrity, pokud pro libovolná $a,b\in R$ platí, že pokud $a\cdot b=0$, tak $a=0$ nebo $b=0$. \end{definice}
+
+
+%\begin{definice} Nechť T je množina, $+$, $\cdot$ binární operace na ní definované. Pak $(T,+,\cdot)$ je těleso, pokud:
+%\begin{enumerate}
+%\item $(T,+)$ je komutativní grupa,
+%\item $(T\smallsetminus\{0\},\cdot)$ je komutativní grupa,
+%\item platí oboustranná distributivita, tedy pro libovolné $a,b,c\in T$ platí $a\cdot(b+c)=a\cdot b+a\cdot c,$ $(b+c)\cdot a=b\cdot a+ c\cdot a.$
+%\end{enumerate}
+%\end{definice}
+
+%\ Jinak řečeno, těleso je takový obor integrity, jehož každý nenulový prvek je jednotkou, neboli je \textit{invertibilní} -- tedy má vůči operaci $\cdot$ inverzní prvek.
+
+
+
+
+
+
+%V případě $p=2$ se nám situace ztíží tím, že pokud $m\equiv1\pmod4$, nemůžeme aplikovat větu \ref{polynomy}, jelikož 2 dělí $|\z[\frac{1+\sqrt m}2]/\z[\sqrt m]|$. Přesto ale dokážeme následující větu:
+
+%\begin{veta} Nechť $K=\q(\sqrt m)$. Potom: $$2\o_K=
+%\begin{cases}
+%(2,\sqrt m)^2 \quad \text{pokud}\; m\equiv2\pmod4, \\
+%(2,1+\sqrt m)^2 \quad \text{pokud} \;m\equiv3\pmod4, \\
+%(2,\frac{1-\sqrt m}2)(2,\frac{1+\sqrt m}2) \quad \text{pokud}\; m\equiv1\pmod 8, \\
+%2\o_K,\; \text{tj. je prvoideál} \quad \text{pokud}\; m\equiv 5\pmod 8.
+%\end{cases}$$
+%\end{veta}
+
+%\begin{proof} Zamysleme se nejprve nad diskriminantem okruhu $\o_K$. Z věty \ref{tabulka} víme, že v případě $m\equiv 2,3\pmod4$ platí $d(\o_K)=4m$ a v případě $m\equiv1\pmod4$ platí $d(\o_K)=m$.
+
+%\ Uvažujme nejprve $m\equiv2,3\pmod4$. V tomto případě můžeme aplikovat větu \ref{polynomy}. Jelikož $d(\o_K)=4m$, tak se 2 bude vždy větvit.
+
+%\ Pokud $m\equiv2\pmod4$, tak $2|m$ a tedy $x^2-m\equiv(x)^2\pmod2$. Tudíž $2\o_K=(2,\sqrt m)^2$ (analogicky jsme postupovali v důkazu předchozí věty).
+
+%\ Pokud $m\equiv3\pmod4$, tak jelikož se 2 větví a zároveň nedělí $m$, platí $x^2-m\equiv x^2+1\equiv x^2+2x+1\equiv (x+1)^2\pmod2$ a tedy $2\o_K=(2,1+\sqrt m)^2$.
+
+%\ Nyní uvažujme $m\equiv1\pmod4$, tedy $\o_K=\z[\frac{1+\sqrt m}2]$. Víme již, že nemůžeme použít větu \ref{polynomy}, musíme tedy použít jiné argumenty.
+
+%\ Pokud $m\equiv1\pmod 8$, tak $2\in (2,\frac{1-\sqrt m}2)(2,\frac{1+\sqrt m}2)=(4,1+\sqrt m,1-\sqrt m,\frac{1- m}4)$ protože $\nsd(4,\frac{1-m}4)=2$ (a díky Bezoutově rovnosti s každými dvěma celými čísly ležícími v daném ideálu v něm leží i jejich největší společný dělitel). Tudíž $2\o_K\s(2,\frac{1-\sqrt m}2)(2,\frac{1+\sqrt m}2)$ a proto $(2,\frac{1-\sqrt m}2)(2,\frac{1+\sqrt m}2)|2\o_K$. Aby platila věta \ref{eifi}, musí už platit přímo rovnost.
+
+%\ Zbývá případ $m\equiv 5\pmod 8$. Nechť $\P$ je prvoideál $o\_K$, $\P|2\o_K$. Ukážeme $f(\P|2)=2$. To uděláme sporem: pokud $f(\P|2)=1$, tak $\o_K/\P\cong\z/2\z$. Uvažujme polynom $x^2-x+\frac{1-m}4$. Ten má v $\o_K$ kořen $\frac{1+\sqrt m}4$; má tedy kořen i v $\o_K/\P$. Na druhou stranu tento polynom v $\z/2\z$ žádný kořen nemá, jelikož $x^2-x+\frac{1-m}4\equiv x^2-x+1\pmod2$. To je spor s tím, že jsou tělesa $\o_K/\P$ a $\z/2\z$ izomorfní a $2\o_K$ je tedy opravdu prvoideál.
+
+%\
+%\end{proof}
+
+%\ Případ $p=2$ nás zajímá spíše pro úplnost, případ $p$ je liché bude hrát ústřední roli v důkazu kvadratické recprocity a dalších tvrzení. 
+
+
+
+
+
+\begin{poznamka} Často nastává situace, kdy $K$ je \uv{skoro} podtěleso $L$. Uvažujme například těleso $\R$ s klasickým sčítáním a násobením a těleso $\R^2=\{(a,b)\mid (a,b)\in\R\}$ s operacemi sčítání po složkách (tj. $(a,b)+(c,d)=(a+c,b+d)$) a s násobením definovaným jako $(a,b)\cdot(c,d)=(ac-bd,ad+bc)$ pro všechna $a,b,c,d\in\R$.Sice $\R$ není podtělesem tělesa $\R^2$, ale existuje vnoření (tj. injektivní homomorfismus) $f: \R\rightarrow\R^2$ (např. definované jako $f(a)=(a,0)$), tzn. $\R$ je izomorfní s nějakým podtělesem $f(\R)=\{f(a)\mid a\in\R\}$ tělesa $\R^2$. Sice tedy přísně vzato nemůžeme hovořit o rozšíření $\R\s\R^2$, ale jelikož $\R$ a $f(\R)$ jsou izomorfní, tudíž mají s algebraického hlediska identické vlastnosti, tak někdy nebudeme zcela korektní a např. v této situaci budeme mluvit o rozšíření $\R\s\R^2$ místo o $f(\R)\s\R^2$. \label{nejsmekorektni} \end{poznamka}
+
+\ Zohledníme-li tuto poznámku, můžeme psát $[\R^2:\R]=2$.
+
+\section{Základní poznatky}
+
+\ V této části stručně připomeneme pojmy z algebry, které budeme v práci nejčastěji používat -- především hlavní větu o faktorgrupách, ideál okruhu a vlastnosti okruhu polynomů jedné proměnné.
+
+\ Uveďme tedy nejprve hlavní větu o faktorgrupách:
+
+\begin{veta} Nechť $f:G\rightarrow K$ je homomorfismus grup, $H$ normální podgrupa grupy $G$ splňující $H\s\ker f$. Nechť $\pi:G\rightarrow G/H$ je projekce grupy $G$ na faktorgrupu $G/H$. Pak existuje, a to jediné, zobrazení $\fii:G/H\rightarrow K$ splňující $\fii\odot\pi=f$. Navíc platí: \begin{enumerate}
+\item $\fii$ je homomorfismus grup,
+\item $\fii$ je injekce, právě když $H=\ker f$,
+\item $\fii$ je surjekce, právě když $f$ je surjekce. \end{enumerate} \end{veta}
+$$
+\xymatrix{
+G\ar[rr]^f\ar[dr]^\pi&&K \\
+&G/H\ar@{-->}[ur]_\fii&
+}
+$$
+
+\ Věta má podstatné důsledky:
+
+\begin{dusledek} Nechť $f:G\rightarrow K$ je homomorfismus grup, $f(G)=\{f(g)\mid g\in G\}$. Pak $G/\ker f\cong f(G)$. \end{dusledek}
+
+\begin{dusledek} Homomorfismus grup $f:G\rightarrow K$ je injektivní, právě když $\ker f$ je triviální grupa. \end{dusledek}
+
+Nyní přejděme k pojmu ideál.
+ 
+
+\begin{poznamka} V dalším textu budeme používat následující značení: pro těleso $K$ symbolem $K(a_1,...,a_n)$ míníme těleso generované množinou $K\cup\{a_1,...,a_n\}$. V případě okruhů používáme obdobné značení -- nejmenší okruh obsahující nějaký okruh $R$ a množinu $\{a_1,...,a_n\}$ značíme $R[a_1,...,a_n]$. Tedy např. $\mathbb{Q}(\sqrt 2)$ nejmenší těleso obsahující racionální čísla a odmocninu ze dvou a $\z[i]$ je nejmenší okruh obsahující celá čísla a imaginární jednotku~$i$. \end{poznamka}
+
+
+\begin{definice} Nechť R je okruh. Neprázdnou množinu $\I\subseteq R$ nazveme ideálem okruhu R, pokud:
+\begin{enumerate}
+\item pro libovolné $a,b\in \I$ platí $a+b\in \I$,
+\item pro libovolné $r\in R, a\in \I$ platí $ar\in \I, ra\in \I$.
+\end{enumerate}
+\end{definice}
+
+\ Každý okruh má alespoň dva ideály, a to celý okruh a triviální ideál $\{0\}$ -- říkáme jim nevlastní ideály a ostatní ideály nazýváme vlastní. 
+
+\begin{definice} Ideál $\I$ okruhu $R$ nazýváme hlavní, pokud je ve tvaru $aR=\{ar|r\in R\}$ pro nějaké $a\in R$. Danému oboru integrity říkáme okruh hlavních ideálů, pokud je každý jeho ideál hlavní. \end{definice}
+
+\ Typickým okruhu hlavních ideálů jsou celá čísla: jediné ideály jsou zde tvaru $n\mathbb{Z}$, kde $n$ je libovolné nezáporné celé číslo.
+
+\begin{poznamka} Hlavní ideál $aR$ někdy značíme $(a)$. Obecně je možné definovat ideál generovaný množinou a ideál generovaný konečnou množinou $\{a_1,a_2,...,a_n\}$ značíme $(a_1,a_2,...,a_n)$.\end{poznamka}
+
+\ Všimněme si, že z definice ideálu přímo plyne důležitý poznatek:
+
+\begin{veta} Nechť $\I$ je ideál okruhu R. Pak $(\I,+)$ je normální podgrupa grupy (R,+). \end{veta}
+
+\ Ideály jsou úzce spjaté s homomorfismy okruhů. Platí totiž následující věta:
+
+\begin{veta} Nechť $f:R\rightarrow S$ je homomorfismus okruhů. Pak platí:
+\begin{enumerate}
+\item je-li $\J$ ideál okruhu $S$, pak $f^{-1}(\J)=\{x\in R|f(x)\in \J\}$ je ideál okruhu $R$,
+\item je-li $f$ surjekce a $\I$ ideál okruhu $R$, pak $f(\I)=\{f(x)|x\in \I\}$ je ideál okruhu $S$.
+\end{enumerate}
+\end{veta}
+
+\ To mimo jiné znamená, že jádro libovolného homomorfismu $f:R\rightarrow S$ je ideál okruhu $R$, jelikož $\ker f=f^{-1}(0)$.
+
+\ Podle ideálů můžeme faktorizovat. Jelikože je pro každý ideál $\I$ je $(\I,+)$ normální podgrupa $(R,+)$, můžeme sestrojit faktorgrupu $(R/\I,+)$, kde + je nyní sčítání tříd pomocí reprezentantů. Lze ukázat, že na této faktorgrupě je možné definovat i násobení pomocí reprezentantů tak, že $R/\I$ je s těmito operacemi okruh. Takto vzniklý okruh nazýváme faktorokruh. Existuje hlavní věta o faktoroktuzích analogická hlavní větě o faktorgrupách.
+
+\ Existují dvě významné skupiny ideálů, které má smysl definovat:
+
+\begin{definice} Nechť R je okruh, $\I$ jeho vlastní ideál. O ideálu $\I$ říkáme, že je:
+\begin{enumerate}
+\item prvoideál, pokud pro libovolné $a,b\in R$ platí implikace $ab\in \I\Rightarrow a\in \I nebo b\in \I$,
+\item maximální ideál, pokud neexistuje žádný ideál $\J$ okruhu $R$ splňující $\I\subsetneq \J\subsetneq R$.
+\end{enumerate}
+\end{definice}
+
+\ Pokud je okruh $R$ komutativní, můžeme tyto skupiny ideálů poznat podle toho, jak vypadá jimi určený faktorokruh:
+
+\begin{veta} Nechť $R$ je komutativní okruh, $\I$ jeho vlastní ideál. Pak je $\I$ prvoideál, právě když faktorokruh $R/\I$ je obor integrity, a $\I$ je maximální ideál, právě když je $R/\I$ těleso. \label{prvmax} \end{veta}
+
+\ Dále stručně připomeňme vlastnosti polynomů jedné proměnné.
+
+\begin{veta} Nechť $R$ je okruh. Pak množina $R[x]$ polynomů jedné proměnné s koeficienty z $R$ tvoří rovněž okruh (s obvykle definovaným sčítáním a násobením polynomů). Navíc je-li $R$ komutativní (resp. obor integrity), tak i $R[x]$ je komutativní (resp. obor integrity). \end{veta}
+
+\begin{veta} Nechť $R$ je obor integrity. Pak polynom $f\in R[x]$ má v $R$ nejvýše tolik kořenů, kolik je jeho stupeň (který značíme $\deg f$). \end{veta}
+
+\begin{veta} Nechť $R$ je obor integrity. Pak je $R[x]$ euklidovský okruh, přesněji pro každé dva polynomy $f,g\in R[x]$ existují právě jedna dvojice polynomů $k,r\in R[x]$ taková, že $f=kg+r$ a $\deg r<\deg g$. \end{veta} 
+
+\ Na závěr definujme podílové těleso a uveďme některé jeho příklady.
+
+\begin{definice} Nechť $R$ je obor integrity. Nejmenší těleso obsahující $R$ nazveme podílové těleso okruhu R. \end{definice}
+
+\begin{veta} Nechť $R$ je obor integrity. Pak jeho podílové těleso $F$ můžeme psát ve tvaru $$F=\left\{\frac ab\mid a,b\in R, b\ne0\right\},$$ kde $\frac ab=\frac cd$, právě když $ad=bc$ a operace sčítání a násobení provádíme následovně: $$\frac ab+\frac cd=\frac{ad+bc}{bd},$$ $$\frac ab\cdot \frac cd= \frac{ac}{bd}.$$ \end{veta}
+
+\ Podílové těleso okruhu $\z$ je těleso racionálních čísel. Podílové těleso okruhu $R[x]$ nazýváme \textit{těleso racionálních funkcí} a značíme ho $R(x)$. Tyto pojmy můžeme zobecnit: množina polynomů více proměnných nad oborem integrity $R$ tvoří rovněž obor integrity a jeho podílové těleso také nazýváme těleso racionálních funkcí.
