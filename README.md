@@ -1,3 +1,3 @@
-# SIDH protokol
+# SIDH protocol
 
-Obsahuje (snad) funkční implementaci protokolu SIDH v Sage.
+Contains a working SIDH implementation in SageMath 9.0.
