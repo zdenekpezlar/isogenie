@@ -1,3 +1,3 @@
 # SIDH protocol
 
-Contains a working SIDH implementation in SageMath 9.0.
+Contains a working SIDH implementation in Sage 9.0.
