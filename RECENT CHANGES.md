@@ -1,3 +1,3 @@
-Hotovo 1.1, 1.3
+Hotovo 1.1, 1.3, 1.4
 
-Opět trochu rozepsána 2. kapitola
+Konec 1.2 si nechám, až si to trochu víc prostuduju
