@@ -1,3 +1,4 @@
-Hotovo 1.1, 1.3, 1.4
+Přidáno 3,  začátek 4
+1 přeuspořádno, přidány důkazy etc.
+2 začal jsem diskuzi SIDH, pořád se mi nelíbí to před tím a budu to měnit
 
-Konec 1.2 si nechám, až si to trochu víc prostuduju
