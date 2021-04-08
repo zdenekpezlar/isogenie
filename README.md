@@ -1,3 +1,3 @@
 # SIDH protocol
 
-Contains a working SIDH implementation in Sage 9.0.
+Obsahuje pracující implementaci protokolu SIDH implementation v Sage 9.0.
