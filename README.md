@@ -4,21 +4,21 @@ Contained within this section are my own (commented) implementations of the prot
 
 Instructions on launching the aplet:
 
--Download Sage 9.0 or higher : https://www.sagemath.org/download.html
+- Download Sage 9.0 or higher : https://www.sagemath.org/download.html
+ 
+- Install bottle package - Enter "sage --pip3 install bottle" in Sage shell
 
--Install bottle package - Enter "sage --pip3 install bottle" in Sage shell
+- Find the path of "form.py" - eg. C:/Users/User/Implementation-Web - and open the file "form.py" in Sage shell - "sage form.py"
 
--Find the path of "form.py" - eg. C:/Users/User/Implementation-Web - and open the file "form.py" in Sage shell - "sage form.py"
-
--Open //localhost:port from Sage shell
+- Open //localhost:port from Sage shell
 
 
 Instructions on using the aplet:
 
--Choose a protocol - SIDH or SITH
+- Choose a protocol - SIDH or SITH
 
--Enter lA, eA, lB, eB such that p = lA^eA * lB^eB - 1 is a prime with p = -1 mod 4 - eg. lA = 2, eA = 8, lB = 3, eB = 5
+- Enter lA, eA, lB, eB such that p = lA^eA * lB^eB - 1 is a prime with p = -1 mod 4 - eg. lA = 2, eA = 8, lB = 3, eB = 5
 
--Click on [SIDH] or [SITH]
+- Click on [SIDH] or [SITH]
 
--And finally, enjoy!
+- And finally, enjoy!
