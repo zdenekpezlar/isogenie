@@ -8,7 +8,7 @@ Instructions on launching the aplet:
  
 - Install bottle package - Enter "sage --pip3 install bottle" in Sage shell
 
-- Download files "SIDH.py", "SITH.py" a "form.py" and place them all into one directory
+- Download files "SIDH.py", "SITH.py" and "form.py" and place them all into one directory
 
 - Find the path of "form.py" - eg. C:/Users/User/Folder - and open the file "form.py" in Sage shell - "sage form.py"
 
