@@ -1,4 +1,3 @@
-# isogenie
 Contained within this branch are my own (commented) implementations of the protocols SIDH and SITH in Sage 9.0 - "SIDH.ipynb" and "SITH.ipynb", and an aplet demonstrating a random instance of these protocols - "form.py".
 
 
