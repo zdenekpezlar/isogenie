@@ -9,7 +9,7 @@ Instructions on launching the aplet:
 
 - Download files "SIDH.py", "SITH.py" and "form.py" and place them all into one directory
 
-- Find the path of "form.py" - eg. C:/Users/User/Folder - and open the file "form.py" in Sage shell - "sage form.py"
+- Find the path to "form.py" - eg. C:/Users/User/Folder - and open the file "form.py" in Sage shell - "sage form.py"
 
 - Open //localhost:port from Sage shell
 
